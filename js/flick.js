@@ -23,7 +23,7 @@ $(function (e) {
 
       var idx = e.no;
       if(e.direction === eg.Flicking.DIRECTION_LEFT) {
-        if(idx >= nPanel) {
+        if(idx >= nPanel - 1) {
           idx = 0;
         } else {
           idx++;
