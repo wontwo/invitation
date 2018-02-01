@@ -50,6 +50,10 @@ $(function (e) {
   lazyImage($(mFlick.getPrevElement()).find("img"));
 
   autoFlick();
+
+  $(window).on("resize", function(e) {
+    mFlick.resize();
+  });
 });
 
 function lazyImage(target) {
@@ -62,6 +66,6 @@ function lazyImage(target) {
 function autoFlick() {
   evtAutoFlick = setInterval(function(){
     mFlick.next();
-  }, 3000);
+  }, 4000);
 }
 
