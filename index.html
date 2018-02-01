@@ -25,14 +25,23 @@
 
 
   <style>
-      .map_wrap {
-        margin: 0 15px;
-        height: 200px;
-        background-color: #ddd;
-        text-align: center;
-        font-size: 14px;
-      }
-    </style>
+    .img100 {
+      max-width: 100%;
+      width: auto !important;
+      width: 100%;
+    }
+    .map_wrap {
+      margin: 0 15px;
+      height: 200px;
+      background-color: #ddd;
+      text-align: center;
+      font-size: 14px;
+    }
+    .slide_wrap {
+      margin: 10px;
+    }
+    
+  </style>
 </head>
 
 <body>
@@ -46,9 +55,9 @@
       </div>
 
       <div style="text-align: center; width: 100%; display:none;">
-          <img src="images/title.png?1" style="width: 100%;">
+        <img src="images/title.png?1" style="width: 100%;">
       </div>
-  
+
       <div class="pure-u-1">
         <div class="l-box">
           <h2>Creating a Photo Gallery Layout</h2>
@@ -68,7 +77,23 @@
           </p>
         </div>
       </div>
+
+      
     </div>
+
+    <div class="slide_wrap">
+        <div id="flickImage" style="height: 250px;">
+          <div>
+            <img src="images/picture/20180125_37811.JPG" class="img100">
+          </div>
+          <div>
+            <img src="images/picture/20180125_37791.JPG" class="img100">
+          </div>
+          <div>
+            <img src="images/picture/20180125_37697.JPG" class="img100">
+          </div>
+        </div>
+      </div>
 
     <div style="margin-bottom: 10px;">
       <div class="map_wrap" id="map"></div>
@@ -76,31 +101,44 @@
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js"></script>
+  <script src="https://naver.github.io/egjs-flicking/release/latest/dist/flicking.pkgd.min.js"></script>
+  <script>
+    $(function (e) {
+      var mFlick = new eg.Flicking("#flickImage", {
+        duration: 500,
+        circular: true,
+      });
+
+      setInterval(function(){
+        mFlick.next();
+      }, 3000);
+    });
+  </script>
+
   <script type="text/javascript">
-	var latlng = "37.2738774, 127.0492486";
-	function initMap() {
-		if (latlng.length <= 0)
-			return false;
-		arr = latlng.split(",");
-		if (arr.length <= 1)
-			return false;
+    var latlng = "37.2738774, 127.0492486";
+    function initMap() {
+      if (latlng.length <= 0)
+        return false;
+      arr = latlng.split(",");
+      if (arr.length <= 1)
+        return false;
 
-		var myLatLng = {
-			lat : parseFloat($.trim(arr[0])),
-			lng : parseFloat($.trim(arr[1]))
-		};
-		var map = new google.maps.Map(document.getElementById('map'), {
-			zoom : 17,
-			center : myLatLng
-		});
-		var arr = [];
+      var myLatLng = {
+        lat: parseFloat($.trim(arr[0])),
+        lng: parseFloat($.trim(arr[1]))
+      };
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 17,
+        center: myLatLng
+      });
+      var arr = [];
 
-		new google.maps.Marker({
-			position : myLatLng,
-			map : map
-		});
-	}
+      new google.maps.Marker({
+        position: myLatLng,
+        map: map
+      });
+    }
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAm7f4PZtjONLdR6YpdKd1fKJgVD0MdStU&callback=initMap" type="text/javascript"></script>
 </body>
